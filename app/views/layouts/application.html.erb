@@ -18,6 +18,19 @@
     <% if alert %>
       <div class="alert alert-danger m-0" role="alert"><%= alert %></div>
     <% end %>
+
+    <% if current_user %>
+      <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="d-flex align-items-center navbar-brand" href="/">
+            <%= image_tag 'upttmbi-logo.svg', height: "40" %>
+            <p class="m-0 ms-2 text-muted "><%= current_user.email %></p>
+          </a>
+          <%= link_to('Salir',  destroy_user_session_path, :method => 'delete', class: 'btn btn-danger') %>
+        </div>
+      </nav>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
