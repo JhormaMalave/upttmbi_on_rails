@@ -9,6 +9,32 @@
 
 roles = ['Super admin', 'Personal admin', 'Department admin']
 
+users = [
+  {
+    email: 'admin.p@upttmbi.com',
+    password: 123456 
+  }
+]
+
+user_roles = [
+  {
+    user_id: 1,
+    role_id: 2
+  }
+]
+
+
+users.each do |user|
+  new_user = User.new(user)
+  new_user.save
+end
+
+user_roles.each do |user_role|
+  
+  UserRole.find_or_create_by(user_role)
+end
+
 roles.each do |role|
   Role.find_or_create_by(name: role)
 end
+
