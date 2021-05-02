@@ -25,14 +25,17 @@ user_roles = [
 
 id_types = ['V', 'P']
 
-
+"""
 users.each do |user|
   new_user = User.new(user)
   new_user.save
 end
+"""
+id_types.each do |id_type|
+  IdType.find_or_create_by(name: id_type)
+end
 
 user_roles.each do |user_role|
-  
   UserRole.find_or_create_by(user_role)
 end
 
