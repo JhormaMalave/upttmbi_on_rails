@@ -23,6 +23,8 @@ user_roles = [
   }
 ]
 
+id_types = ['V', 'P']
+
 
 users.each do |user|
   new_user = User.new(user)

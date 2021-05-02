@@ -10,16 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_02_032709) do
+ActiveRecord::Schema.define(version: 2021_05_02_213030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "id_types", force: :cascade do |t|
+    t.integer "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_id_types_on_name", unique: true
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.bigint "id_type_id", null: false
+    t.string "id_number"
+    t.string "name"
+    t.string "surname"
+    t.date "birth_date"
+    t.text "obsevation"
+    t.date "hire_date"
+    t.date "ordinary_date"
+    t.boolean "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["id_type_id"], name: "index_teachers_on_id_type_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -43,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_05_02_032709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "teachers", "id_types"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
 end
