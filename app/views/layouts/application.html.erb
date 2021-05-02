@@ -13,10 +13,10 @@
 
   <body>
     <% if notice %>
-      <p class="notice"><%= notice %></p>
+      <div class="alert alert-success m-0" role="alert"><%= notice %></div>
     <% end %>
     <% if alert %>
-      <p class="alert"><%= alert %></p>
+      <div class="alert alert-danger m-0" role="alert"><%= alert %></div>
     <% end %>
     <%= yield %>
   </body>
