@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Staff::Teachers#index</h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Identificación</th>
+        <th>Nombres</th>
+        <th>Estado</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teachers.each do |teacher| %>
+        <tr>
+          <td><%= teacher.id_number %></td>
+          <td><%= teacher.name %></td>
+          <td><%= teacher.id_status %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

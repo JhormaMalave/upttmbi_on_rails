@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  
+  namespace :staff do
+    resources :teachers, only: [:index]
+  end
+
   root to: 'home#index'
-  get 'home/index'
   
   devise_for :users, only: [:sessions], controllers: {
     sessions: 'users/sessions'
