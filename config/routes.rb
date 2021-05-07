@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   namespace :staff do
-    resources :teachers, only: [:index]
+    resources :teachers, only: [:index, :new]
   end
 
   root to: 'home#index'

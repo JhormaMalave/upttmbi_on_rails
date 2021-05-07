@@ -1,0 +1,61 @@
+<%= form_with(model: [:staff, teacher]) do |form| %>
+  <% if teacher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+        <% teacher.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :id_type_id, 'Tipo de identidad', class: 'form-label' %>
+    <%= form.collection_select :id_type_id, IdType.all, :id, :name, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :id_number, 'Número de identidad', class: 'form-label' %>
+    <%= form.text_field :id_number, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :name, 'Nombres', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :surname, 'Apellidos', class: 'form-label' %>
+    <%= form.text_field :surname, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :birth_date, class: 'form-label' %>
+    <%= form.date_field :birth_date, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :obsevation, 'Observación', class: 'form-label' %>
+    <%= form.text_area :obsevation, class: 'form-control', rows: 3 %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :hire_date, class: 'form-label' %>
+    <%= form.date_field :hire_date, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :ordinary_date, class: 'form-label' %>
+    <%= form.date_field :ordinary_date, class: 'form-control' %>
+  </div>
+  
+  <div class="form-check form-switch mb-3">
+    <%= form.check_box :status, class: 'form-check-input', checked: true %>
+    <%= form.label :status, 'Estado', class: 'form-check-label' %>
+  </div>
+
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+<% end %>
