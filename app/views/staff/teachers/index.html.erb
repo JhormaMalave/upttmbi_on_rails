@@ -1,23 +1,34 @@
 <div class="container">
-  <h1>Staff::Teachers#index</h1>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Identificación</th>
-        <th>Nombres</th>
-        <th>Estado</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @teachers.each do |teacher| %>
-        <tr>
-          <td><%= teacher.id_number %></td>
-          <td><%= teacher.name %></td>
-          <td><%= teacher.id_status %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <h1 class="display-1">Docentes</h1>
+  
+  <section>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Docentes registrados</h2>
+      <%= link_to 'Nuevo', new_staff_teacher_path, class: 'btn btn-outline-primary' %>
+    </div>
+    <div class="px-5">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Identificación</th>
+            <th>Nombres</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @teachers.each do |teacher| %>
+            <tr>
+              <td><%= teacher.id %></td>
+              <td><%= teacher.id_type.name %> - <%= teacher.id_number %></td>
+              <td><%= teacher.surname %> <%= teacher.name %></td>
+              <td><%= teacher.status %></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </div>

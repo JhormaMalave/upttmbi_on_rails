@@ -1,0 +1,43 @@
+<div class="container pt-4">
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to 'Volver', staff_teachers_path, class: 'btn btn-link' %>
+    <%= link_to 'Editar', edit_staff_teacher_path(@teacher), class: 'btn btn-warning' %>
+  </div>
+  <h1 class="display-3"><%= @teacher.name %></h1>
+  <h2 class="text-muted mb-4">Información</h2>
+  <div class="">
+    <h3 class="h6">Identificación</h3>
+    <p><%= @teacher.id_type.name %> - <%= @teacher.id_number %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Nombres</h3>
+    <p><%= @teacher.name %> <%= @teacher.surname %></p>
+  </p>
+  <div class="">
+    <h3 class="h6">Fecha de nacimiento</h3>
+    <p><%= @teacher.birth_date %></p>
+  </div>
+
+  <div class="">
+    <h3 class="h6">Fecha de contrato</h3>
+    <p><%= @teacher.hire_date || 'No definido' %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Fecha regular</h3>
+    <p><%= @teacher.ordinary_date || 'No definido' %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Estado</h3>
+    <% if @teacher.status %>
+      <p class="text-success">Activo</p>
+    <% else %>
+      <p class="text-danger">Inactivo</p>
+    <% end %>
+  </div>
+  <div class="">
+    <h3 class="h6">Observación</h3>
+    <p><%= @teacher.obsevation || 'No definido' %></p>
+  </div>
+
+
+</div>
