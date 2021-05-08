@@ -1,5 +1,5 @@
 class Staff::TeachersController < ApplicationController
-  before_action :set_teacher, only: %i[ show edit update ]
+  before_action :set_teacher, only: %i[ show edit update destroy ]
 
   # GET /staff/teachers or /staff/teachers.json
   def index
@@ -40,6 +40,15 @@ class Staff::TeachersController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # DELETE /staff/teachers/1 or /staff/teachers/1.json
+  def destroy
+    @teacher.destroy
+    respond_to do |format|
+      format.html { redirect_to staff_teachers_url, notice: "Teacher was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 

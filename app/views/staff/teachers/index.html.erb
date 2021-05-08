@@ -24,7 +24,10 @@
               <td><%= teacher.id_type.name %> - <%= teacher.id_number %></td>
               <td><%= teacher.surname %> <%= teacher.name %></td>
               <td><%= teacher.status %></td>
-              <td></td>
+              <td>
+              <%= link_to 'Edit', edit_staff_teacher_path(teacher) %> | 
+              <%= link_to 'Destroy', staff_teacher_path(teacher), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
             </tr>
           <% end %>
         </tbody>
