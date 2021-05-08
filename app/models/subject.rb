@@ -1,4 +1,5 @@
 class Subject < ApplicationRecord
+  belongs_to :career
   belongs_to :course
 
   enum subject_type: ['Taller', 'Curso']

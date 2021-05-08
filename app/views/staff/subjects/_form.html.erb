@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="mb-3">
+    <%= form.label :career_id, 'Carrera', class: 'form-label' %>
+    <%= form.collection_select :career_id, Career.all, :id, :name, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :course_id, 'Trayecto', class: 'form-label' %>
     <%= form.collection_select :course_id, Course.all, :id, :name, {}, class: 'form-select' %>
   </div>
