@@ -25,6 +25,8 @@ user_roles = [
 
 id_types = ['V', 'P']
 
+courses = [0, 1, 2, 3, 4]
+
 """
 users.each do |user|
   new_user = User.new(user)
@@ -43,3 +45,6 @@ roles.each do |role|
   Role.find_or_create_by(name: role)
 end
 
+courses.each do |course|
+  Course.find_or_create_by(name: course)
+end
