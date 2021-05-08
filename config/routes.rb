@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
   namespace :staff do
     resources :careers
     resources :teachers
+    resources :subjects
+
     root to: 'home#index'
     get 'home/index'
   end

@@ -1,0 +1,48 @@
+<%= form_with(model: [:staff, subject]) do |form| %>
+  <% if subject.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(subject.errors.count, "error") %> prohibited this subject from being saved:</h2>
+
+      <ul>
+        <% subject.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :course_id, 'Trayecto', class: 'form-label' %>
+    <%= form.collection_select :course_id, Course.all, :id, :name, {}, class: 'form-select' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :name, 'Nombre', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :curricular_units, 'Unidades curiculares', class: 'form-label' %>
+    <%= form.number_field :curricular_units, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :duration, 'Duración', class: 'form-label' %>
+    <%= form.select :duration, ['Trimestral', 'Semestral', 'Anual'], {}, class: 'form-select'  %>
+  </div>
+
+
+  <div class="mb-3">
+    <%= form.label :subject_type, 'Tipo de asignatura', class: 'form-label' %>
+    <%= form.select :subject_type, ['Taller', 'Curso'], {}, class: 'form-select'  %>
+  </div>
+
+  <div class="form-check form-switch mb-3">
+    <%= form.check_box :status, class: 'form-check-input', checked: true %>
+    <%= form.label :status, 'Estado', class: 'form-check-label' %>
+  </div>
+
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
+<% end %>

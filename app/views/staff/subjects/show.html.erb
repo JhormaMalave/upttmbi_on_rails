@@ -1,0 +1,37 @@
+<div class="container pt-4">
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to 'Volver', staff_subjects_path, class: 'btn btn-link' %>
+    <%= link_to 'Editar', edit_staff_subject_path(@subject), class: 'btn btn-warning' %>
+  </div>
+  <h1 class="display-3"><%= @subject.name %></h1>
+  <h2 class="text-muted mb-4">Información</h2>
+
+  <div class="">
+    <h3 class="h6">Nombre</h3>
+    <p><%= @subject.name %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Trayecto</h3>
+    <p><%= @subject.course.name %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Unidades curriculares</h3>
+    <p><%= @subject.curricular_units %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Duración</h3>
+    <p><%= @subject.duration %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Tipo de asignatura</h3>
+    <p><%= @subject.subject_type %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Estado</h3>
+    <% if @subject.status %>
+      <p class="text-success">Activo</p>
+    <% else %>
+      <p class="text-danger">Inactivo</p>
+    <% end %>
+  </div>
+</div>

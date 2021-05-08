@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="display-1">Asignaturas</h1>
+  
+  <section>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Asignaturas registradas</h2>
+      <%= link_to 'Nuevo', new_staff_subject_path, class: 'btn btn-outline-primary' %>
+    </div>
+    <div class="px-5">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Curricular units</th>
+            <th>Duration</th>
+            <th>Status</th>
+            <th>Course</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @subjects.each do |subject| %>
+            <tr>
+              <td><%= subject.name %></td>
+              <td><%= subject.curricular_units %></td>
+              <td><%= subject.duration %></td>
+              <td><%= subject.status %></td>
+              <td><%= subject.course.name %></td>
+              <td>
+                <%= link_to 'Show', staff_subject_path(subject) %>
+                <%= link_to 'Edit', edit_staff_subject_path(subject) %>
+                <%= link_to 'Destroy', staff_subject_url(subject), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+<br>
+
+<%= link_to 'New Staff Subject', new_staff_subject_path %>
