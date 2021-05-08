@@ -1,9 +1,13 @@
-<p id="notice"><%= notice %></p>
+<div class="container pt-4">
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to 'Volver', staff_careers_path, class: 'btn btn-link' %>
+    <%= link_to 'Editar', edit_staff_career_path(@career), class: 'btn btn-warning' %>
+  </div>
+  <h1 class="display-3"><%= @career.name %></h1>
+  <h2 class="text-muted mb-4">Información</h2>
 
-<p>
-  <strong>Name:</strong>
-  <%= @career.name %>
-</p>
-
-<%= link_to 'Edit', edit_staff_career_path(@career) %> |
-<%= link_to 'Back', staff_careers_path %>
+  <div class="">
+    <h3 class="h6">Nombre</h3>
+    <p><%= @career.name %></p>
+  </p>
+</div>

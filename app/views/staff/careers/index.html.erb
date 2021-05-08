@@ -1,25 +1,32 @@
-<h1>Staff Careers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @careers.each do |career| %>
-      <tr>
-        <td><%= career.name %></td>
-        <td><%= link_to 'Show', staff_career_path(career) %></td>
-        <td><%= link_to 'Edit', edit_staff_career_path(career) %></td>
-        <td><%= link_to 'Destroy', staff_careers_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Staff Career', new_staff_career_path %>
+<div class="container">
+  <h1 class="display-1">Carreras</h1>
+  
+  <section>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Carreras registradas</h2>
+      <%= link_to 'Nuevo', new_staff_career_path, class: 'btn btn-outline-primary' %>
+    </div>
+    <div class="px-5">
+      <table class="table table-borderless table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @careers.each do |career| %>
+            <tr>
+              <td><%= career.name %></td>
+              <td>
+              <%= link_to 'Show', staff_career_path(career) %>
+              <%= link_to 'Edit', edit_staff_career_path(career) %>
+              <%= link_to 'Destroy', staff_careers_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
