@@ -5,11 +5,12 @@ class Staff::CareersController < ApplicationController
   def index
     @careers = Career.all
   end
-
+  
   # GET /staff/careers/1 or /staff/careers/1.json
   def show
+    @subjects = @career.subjects
   end
-
+  
   # GET /staff/careers/new
   def new
     @career = Career.new
