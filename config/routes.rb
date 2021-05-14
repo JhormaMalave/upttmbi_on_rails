@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :department do
+    resources :sections
     resources :periods
   end
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_133906) do
+ActiveRecord::Schema.define(version: 2021_05_14_142333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,20 @@ ActiveRecord::Schema.define(version: 2021_05_14_133906) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_roles_on_name", unique: true
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.integer "trimester"
+    t.integer "shift"
+    t.bigint "course_id", null: false
+    t.bigint "period_id", null: false
+    t.bigint "career_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["career_id"], name: "index_sections_on_career_id"
+    t.index ["course_id"], name: "index_sections_on_course_id"
+    t.index ["period_id"], name: "index_sections_on_period_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -101,6 +115,9 @@ ActiveRecord::Schema.define(version: 2021_05_14_133906) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "sections", "careers"
+  add_foreign_key "sections", "courses"
+  add_foreign_key "sections", "periods"
   add_foreign_key "subjects", "careers"
   add_foreign_key "subjects", "courses"
   add_foreign_key "teachers", "id_types"
