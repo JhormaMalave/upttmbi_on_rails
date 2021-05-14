@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :teachers
     resources :subjects
     resources :teacher_careers
+    resources :teacher_degrees
     root to: 'home#index'
     get 'home/index'
   end

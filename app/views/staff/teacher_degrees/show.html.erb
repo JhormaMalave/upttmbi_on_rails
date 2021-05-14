@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @teacher_degree.name %>
+</p>
+
+<p>
+  <strong>Degree type:</strong>
+  <%= @teacher_degree.degree_type %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @teacher_degree.status %>
+</p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @teacher_degree.teacher_id %>
+</p>
+
+<%= link_to 'Edit', edit_staff_teacher_degree_path(@teacher_degree) %> |
+<%= link_to 'Back', staff_teacher_degrees_path %>
