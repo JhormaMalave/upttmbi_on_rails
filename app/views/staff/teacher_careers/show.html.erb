@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @teacher_career.teacher_id %>
+</p>
+
+<p>
+  <strong>Career:</strong>
+  <%= @teacher_career.career_id %>
+</p>
+
+<p>
+  <strong>Observation:</strong>
+  <%= @teacher_career.observation %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @teacher_career.status %>
+</p>
+
+<%= link_to 'Edit', edit_staff_teacher_career_path(@teacher_career) %> |
+<%= link_to 'Back', staff_teacher_careers_path %>

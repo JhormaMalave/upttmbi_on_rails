@@ -1,4 +1,5 @@
 class Teacher < ApplicationRecord
+  has_many :teacher_careers
   belongs_to :id_type
 
   validates :id_number, presence: true, uniqueness: { scope: :id_type_id }

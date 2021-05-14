@@ -1,0 +1,37 @@
+<%= form_with(model: [:staff, teacher_career]) do |form| %>
+  <% if teacher_career.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(teacher_career.errors.count, "error") %> prohibited this teacher_career from being saved:</h2>
+
+      <ul>
+        <% teacher_career.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.text_field :teacher_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :career_id %>
+    <%= form.text_field :career_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.check_box :status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
