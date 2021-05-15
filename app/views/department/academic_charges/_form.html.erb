@@ -1,0 +1,37 @@
+<%= form_with(model: [:department, academic_charge]) do |form| %>
+  <% if academic_charge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(academic_charge.errors.count, "error") %> prohibited this academic_charge from being saved:</h2>
+
+      <ul>
+        <% academic_charge.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :teacher_id %>
+    <%= form.text_field :teacher_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :section_id %>
+    <%= form.text_field :section_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subject_id %>
+    <%= form.text_field :subject_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :observation %>
+    <%= form.text_area :observation %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

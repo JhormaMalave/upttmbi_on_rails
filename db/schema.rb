@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_174036) do
+ActiveRecord::Schema.define(version: 2021_05_14_223713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "academic_charges", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "section_id", null: false
+    t.bigint "subject_id", null: false
+    t.text "observation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["section_id"], name: "index_academic_charges_on_section_id"
+    t.index ["subject_id"], name: "index_academic_charges_on_subject_id"
+    t.index ["teacher_id"], name: "index_academic_charges_on_teacher_id"
+  end
 
   create_table "careers", force: :cascade do |t|
     t.string "name"
@@ -136,6 +148,9 @@ ActiveRecord::Schema.define(version: 2021_05_14_174036) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "academic_charges", "sections"
+  add_foreign_key "academic_charges", "subjects"
+  add_foreign_key "academic_charges", "teachers"
   add_foreign_key "sections", "careers"
   add_foreign_key "sections", "courses"
   add_foreign_key "sections", "periods"
