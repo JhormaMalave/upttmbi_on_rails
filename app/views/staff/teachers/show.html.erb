@@ -1,43 +1,84 @@
 <div class="container pt-4">
-  <div class="d-flex justify-content-end mb-3">
-    <%= link_to 'Volver', staff_teachers_path, class: 'btn btn-link' %>
-    <%= link_to 'Editar', edit_staff_teacher_path(@teacher), class: 'btn btn-warning' %>
-  </div>
-  <h1 class="display-3"><%= @teacher.name %></h1>
-  <h2 class="text-muted mb-4">Información</h2>
-  <div class="">
-    <h3 class="h6">Identificación</h3>
-    <p><%= @teacher.id_type.name %> - <%= @teacher.id_number %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Nombres</h3>
-    <p><%= @teacher.name %> <%= @teacher.surname %></p>
-  </p>
-  <div class="">
-    <h3 class="h6">Fecha de nacimiento</h3>
-    <p><%= @teacher.birth_date %></p>
-  </div>
+  <section>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to 'Docentes', staff_teachers_path, class: 'btn btn-link' %>
+      <%= link_to 'Editar', edit_staff_teacher_path(@teacher), class: 'btn btn-warning' %>
+    </div>
+    <h1 class="display-3"><%= @teacher.name %></h1>
+    <h2 class="text-muted mb-4">Información</h2>
+    <div class="">
+      <h3 class="h6">Identificación</h3>
+      <p><%= @teacher.id_type.name %> - <%= @teacher.id_number %></p>
+    </div>
+    <div class="">
+      <h3 class="h6">Nombres</h3>
+      <p><%= @teacher.name %> <%= @teacher.surname %></p>
+    </p>
+    <div class="">
+      <h3 class="h6">Fecha de nacimiento</h3>
+      <p><%= @teacher.birth_date %></p>
+    </div>
 
-  <div class="">
-    <h3 class="h6">Fecha de contrato</h3>
-    <p><%= @teacher.hire_date || 'No definido' %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Fecha regular</h3>
-    <p><%= @teacher.ordinary_date || 'No definido' %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Estado</h3>
-    <% if @teacher.status %>
-      <p class="text-success">Activo</p>
-    <% else %>
-      <p class="text-danger">Inactivo</p>
-    <% end %>
-  </div>
-  <div class="">
-    <h3 class="h6">Observación</h3>
-    <p><%= @teacher.obsevation || 'No definido' %></p>
-  </div>
+    <div class="">
+      <h3 class="h6">Fecha de contrato</h3>
+      <p><%= @teacher.hire_date || 'No definido' %></p>
+    </div>
+    <div class="">
+      <h3 class="h6">Fecha regular</h3>
+      <p><%= @teacher.ordinary_date || 'No definido' %></p>
+    </div>
+    <div class="">
+      <h3 class="h6">Estado</h3>
+      <% if @teacher.status %>
+        <p class="text-success">Activo</p>
+      <% else %>
+        <p class="text-danger">Inactivo</p>
+      <% end %>
+    </div>
+    <div class="">
+      <h3 class="h6">Observación</h3>
+      <p><%= @teacher.obsevation || 'No definido' %></p>
+    </div>
+  </section>
 
-
+  <hr />
+  <% if @teacher.teacher_degrees.any? %>
+    <section>
+      <h2>Educación</h2>
+      <p class="text-muted mb-4">Certificados y titulos obtenidos o en proceso</p>
+      <div class="d-flex flex-row ">
+      <% @teacher.teacher_degrees.each do |degree|%>
+        <div class="card me-3 <%= 'border-success text-success' if degree.status %>">
+          <div class="card-body">
+            <h3 class="card-title h5"><%= degree.name %></h3>
+            <div class="card-subtitle mb-2 text-muted"><%= degree.degree_type %></div>
+            <p class="card-text"><%= degree.status ? 'Finalizado' : 'En proceso' %></p>
+            <%= link_to 'Ver mas', staff_teacher_degree_path(degree) %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </section>
+  <% end %>
+  <hr />
+  <% if @teacher.careers.any? %>
+    <section>
+      <h2>Carreras</h2>
+      <p class="text-muted mb-4">El docente se encuentra capacitado para impartir clases en las siguientes carreras carreras</p>
+      <div class="d-flex flex-row">
+        <% @teacher.careers.each do |career| %>
+          <% teacher_career = TeacherCareer.find_by(career_id: career.id) %>
+          <div class="card me-3" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title"><%= career.name %></h5>
+              <h6 class="card-subtitle mb-2 text-muted"><%= link_to 'Mostrar información', staff_teacher_career_path(teacher_career.id) %></h6>
+              <p class="card-text"><%= teacher_career.observation? ? teacher_career.observation : 'No tiene ninguna observación' %></p>
+              <%= link_to 'Editar', edit_staff_teacher_career_path(teacher_career), class: 'btn btn-outline-warning' %>
+              <%= link_to 'Eliminar', staff_teacher_career_path(teacher_career), method: :delete, data: { confirm: 'Estas seguro?' }, class: 'btn btn-outline-danger' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
 </div>
