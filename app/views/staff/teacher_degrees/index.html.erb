@@ -1,31 +1,42 @@
-<h1>Staff Teacher Degrees</h1>
+<div class="container">
+  <h1 class="display-1">Educación del docente</h1>
+  <section>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Titulos y certificados registrados</h2>
+      <%= link_to 'Nuevo', new_staff_teacher_degree_path, class: 'btn btn-outline-primary' %>
+    </div>
+    <table class="mt-4 table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Docente</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Degree type</th>
-      <th>Status</th>
-      <th>Teacher</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @teacher_degrees.each do |teacher_degree| %>
-      <tr>
-        <td><%= teacher_degree.name %></td>
-        <td><%= teacher_degree.degree_type %></td>
-        <td><%= teacher_degree.status %></td>
-        <td><%= teacher_degree.teacher_id %></td>
-        <td><%= link_to 'Show', staff_teacher_degree_path(teacher_degree) %></td>
-        <td><%= link_to 'Edit', edit_staff_teacher_degree_path(teacher_degree) %></td>
-        <td><%= link_to 'Destroy', staff_teacher_degree_path(teacher_degree), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Staff Teacher Degree', new_staff_teacher_degree_path %>
+      <tbody>
+        <% @teacher_degrees.each do |teacher_degree| %>
+          <tr>
+            <td><%= teacher_degree.teacher.surname %> <%= teacher_degree.teacher.name %></td>
+            <td><%= teacher_degree.name %></td>
+            <td><%= teacher_degree.degree_type %></td>
+            <td>
+              <% if teacher_degree.status %>
+                <span class="text-success">Finalizado</span>
+              <% else %>
+                <span class="text-danger">En proceso</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'Mostrar', staff_teacher_degree_path(teacher_degree) %> |
+              <%= link_to 'Editar', edit_staff_teacher_degree_path(teacher_degree) %> |
+              <%= link_to 'Eliminar', staff_teacher_degree_path(teacher_degree), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>

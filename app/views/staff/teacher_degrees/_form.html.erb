@@ -11,28 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, 'Nombre', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
+
 
   <div class="mb-3">
     <%= form.label :degree_type, 'Tipo de estudio', class: 'form-label' %>
     <%= form.select :degree_type, ['Pre-Grado', 'Post-Grado', 'Curso'], {}, class: 'form-select'  %>
   </div>
 
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.check_box :status %>
+  <div class="mb-3">
+    <%= form.label :teacher_id, 'Docente', class: 'form-label' %>
+    <%= form.collection_select :teacher_id, Teacher.where(status: true), :id, :name, {}, class: 'form-select' %>
   </div>
 
-  <div class="field">
-    <%= form.label :teacher_id %>
-    <%= form.text_field :teacher_id %>
+  <div class="form-check form-switch mb-3">
+    <%= form.check_box :status, class: 'form-check-input', checked: true %>
+    <%= form.label :status, 'Estado', class: 'form-check-label' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
   </div>
 <% end %>
