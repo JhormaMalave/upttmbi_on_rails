@@ -1,5 +1,6 @@
-class Staff::SubjectsController < ApplicationController
+class Staff::SubjectsController < Staff::StaffController
   before_action :set_subject, only: %i[ show edit update destroy ]
+  
 
   # GET /staff/subjects or /staff/subjects.json
   def index

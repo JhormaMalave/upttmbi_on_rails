@@ -1,4 +1,4 @@
-class Staff::TeacherDegreesController < ApplicationController
+class Staff::TeacherDegreesController < Staff::StaffController
   before_action :set_teacher_degree, only: %i[ show edit update destroy ]
 
   # GET /staff/teacher_degrees or /staff/teacher_degrees.json

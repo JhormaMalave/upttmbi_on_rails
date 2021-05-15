@@ -1,4 +1,4 @@
-class Staff::TeacherCareersController < ApplicationController
+class Staff::TeacherCareersController < Staff::StaffController
   before_action :set_teacher_career, only: %i[ show edit update destroy ]
 
   # GET /staff/teacher_careers or /staff/teacher_careers.json
