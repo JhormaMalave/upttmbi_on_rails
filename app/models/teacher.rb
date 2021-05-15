@@ -1,5 +1,6 @@
 class Teacher < ApplicationRecord
-  has_many :careers, through: :teacher_career
+  has_many :teacher_careers
+  has_many :careers, through: :teacher_careers
   has_many :teacher_degrees
   belongs_to :id_type
 

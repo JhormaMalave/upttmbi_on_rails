@@ -6,32 +6,43 @@
       <h2>Docentes registrados</h2>
       <%= link_to 'Nuevo', new_staff_teacher_path, class: 'btn btn-outline-primary' %>
     </div>
-    <div class="px-5">
-      <table class="table table-borderless table-hover">
-        <thead>
+    <table class="mt-4 table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Identificación</th>
+          <th>Nombres</th>
+          <th>Capacitado</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @teachers.each do |teacher| %>
           <tr>
-            <th>#</th>
-            <th>Identificación</th>
-            <th>Nombres</th>
-            <th>Estado</th>
-            <th>Opciones</th>
+            <td><%= teacher.id %></td>
+            <td><%= teacher.id_type.name %> - <%= teacher.id_number %></td>
+            <td><%= teacher.surname %> <%= teacher.name %></td>
+            <td>
+              <% teacher.careers.each do |career| %>
+                <%= career.name %>
+              <% end %>
+            </td>
+            <td>
+              <% if teacher.status %>
+                <span class="text-success">Activo</span>
+              <% else %>
+                <span class="text-danger">Inactivo</span>
+              <% end %>
+            </td>
+            <td>
+            <%= link_to 'Mostrar', staff_teacher_path(teacher) %> | 
+            <%= link_to 'Editar', edit_staff_teacher_path(teacher) %> | 
+            <%= link_to 'Eliminar', staff_teacher_path(teacher), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @teachers.each do |teacher| %>
-            <tr>
-              <td><%= teacher.id %></td>
-              <td><%= teacher.id_type.name %> - <%= teacher.id_number %></td>
-              <td><%= teacher.surname %> <%= teacher.name %></td>
-              <td><%= teacher.status %></td>
-              <td>
-              <%= link_to 'Edit', edit_staff_teacher_path(teacher) %> | 
-              <%= link_to 'Destroy', staff_teacher_path(teacher), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </section>
 </div>
