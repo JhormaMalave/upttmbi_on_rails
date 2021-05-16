@@ -1,24 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @teacher_degree.name %>
-</p>
-
-<p>
-  <strong>Degree type:</strong>
-  <%= @teacher_degree.degree_type %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @teacher_degree.status %>
-</p>
-
-<p>
-  <strong>Teacher:</strong>
-  <%= @teacher_degree.teacher_id %>
-</p>
-
-<%= link_to 'Edit', edit_staff_teacher_degree_path(@teacher_degree) %> |
-<%= link_to 'Back', staff_teacher_degrees_path %>
+<div class="container pt-4">
+  <section>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to 'Docentes', staff_teacher_degrees_path, class: 'btn btn-link' %>
+      <%= link_to 'Editar', edit_staff_teacher_degree_path(@teacher_degree), class: 'btn btn-warning' %>
+    </div>
+    <h1 class="display-3"><%= @teacher_degree.name %></h1>
+    <h2 class="text-muted mb-4">Información</h2>
+  </section>
+  <div class="">
+    <h3 class="h6">Nombre</h3>
+    <p><%= @teacher_degree.name %></p>
+  </p>
+  <div class="">
+    <h3 class="h6">Tipo de estudio</h3>
+    <p><%= @teacher_degree.degree_type %></p>
+  </p>
+  <div class="">
+    <h3 class="h6">Nombre</h3>
+    <p><%= @teacher_degree.name %></p>
+  </p>
+  <div class="">
+    <h3 class="h6">Estado</h3>
+    <% if @teacher_degree.status %>
+      <p class="text-success">Finalizado</p>
+    <% else %>
+      <p class="text-danger">En proceso</p>
+    <% end %>
+  </div>
+  <div class="">
+    <h3 class="h6">Docente</h3>
+    <%= link_to "#{@teacher_degree.teacher.surname} #{@teacher_degree.teacher.name}", staff_teacher_path(@teacher_degree.teacher_id) %>
+  </div>
+</div>
