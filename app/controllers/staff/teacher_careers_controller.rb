@@ -3,7 +3,7 @@ class Staff::TeacherCareersController < Staff::StaffController
 
   # GET /staff/teacher_careers or /staff/teacher_careers.json
   def index
-    @teacher_careers = TeacherCareer.all
+    @careers = Career.all.order(:name)
   end
 
   # GET /staff/teacher_careers/1 or /staff/teacher_careers/1.json

@@ -1,24 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="container pt-4">
+  <section>
+    <div class="d-flex justify-content-end mb-3">
+      <%= link_to 'Docentes / Carrera', staff_teacher_careers_path, class: 'btn btn-link' %>
+      <%= link_to 'Editar', edit_staff_teacher_career_path(@teacher_career), class: 'btn btn-warning' %>
+    </div>
+    <h1 class="display-3">Docente Carrera</h1>
+    <h2 class="text-muted mb-4">Información</h2>
+    <div class="">
+      <h3 class="h6">Docente</h3>
+      <p><%= link_to "#{@teacher_career.teacher.surname} #{@teacher_career.teacher.name}", staff_teacher_path(@teacher_career.teacher_id) %></p>
+    </div>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @teacher_career.teacher_id %>
-</p>
+    <div class="">
+      <h3 class="h6">Carrera</h3>
+      <p><%= link_to @teacher_career.career.name, staff_career_path(@teacher_career.career_id) %></p>
+    </div>
+    
+    <div class="">
+      <h3 class="h6">Observación</h3>
+      <p><%= @teacher_career.observation || 'No definido' %></p>
+    </div>
+    <div class="">
+      <h3 class="h6">Estado</h3>
+      <% if @teacher_career.status %>
+        <p class="text-success">Activo</p>
+      <% else %>
+        <p class="text-danger">Inactivo</p>
+      <% end %>
+    </div>
+  </section>
 
-<p>
-  <strong>Career:</strong>
-  <%= @teacher_career.career_id %>
-</p>
-
-<p>
-  <strong>Observation:</strong>
-  <%= @teacher_career.observation %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @teacher_career.status %>
-</p>
-
-<%= link_to 'Edit', edit_staff_teacher_career_path(@teacher_career) %> |
-<%= link_to 'Back', staff_teacher_careers_path %>
+</div>
