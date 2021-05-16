@@ -6,27 +6,29 @@
       <h2>Carreras registradas</h2>
       <%= link_to 'Nuevo', new_staff_career_path, class: 'btn btn-outline-primary' %>
     </div>
-    <div class="px-5">
-      <table class="table table-borderless table-hover">
-        <thead>
+    <table class="mt-4 table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Docentes</th>
+          <th>Docentes activos</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @careers.each do |career| %>
           <tr>
-            <th>Name</th>
-            <th>Opciones</th>
+            <td><%= career.name %></td>
+            <td><%= career.teachers.count %></td>
+            <td><%= career.teachers.where(status: true).count %></td>
+            <td>
+            <%= link_to 'Ver', staff_career_path(career) %>
+            <%= link_to 'Editar', edit_staff_career_path(career) %>
+            <%= link_to 'Eliminar', staff_careers_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @careers.each do |career| %>
-            <tr>
-              <td><%= career.name %></td>
-              <td>
-              <%= link_to 'Show', staff_career_path(career) %>
-              <%= link_to 'Edit', edit_staff_career_path(career) %>
-              <%= link_to 'Destroy', staff_careers_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </section>
 </div>

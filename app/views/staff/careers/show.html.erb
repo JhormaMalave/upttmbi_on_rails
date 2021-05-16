@@ -9,7 +9,40 @@
   <div class="">
     <h3 class="h6">Nombre</h3>
     <p><%= @career.name %></p>
-  </p>
+  </div>
+  <div class="">
+    <h3 class="h6">Docentes</h3>
+    <p><%= @career.teachers.count %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Docentes activos</h3>
+    <p><%= @career.teachers.where(status: true).count %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Docentes inactivos</h3>
+    <p><%= @career.teachers.where(status: false).count %></p>
+  </div>
+  <div class="">
+    <h3 class="h6">Unidades curriculares</h3>
+    <p><%= @career.subjects.where(status: true).count %></p>
+  </div>
+  
+  <div>
+    <h2 class="mb-4 text-muted">Docentes activos</h2>
+    <% if @career.teacher_careers.where(status: true).any? %>
+      <ul class="list-group list-group-flush mb-4">
+        <% @career.teacher_careers.where(status: true).each do |teacher_career| %>
+          <li class="d-flex justify-content-between list-group-item">
+            <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher)  %>
+            <%= link_to "Ver más", staff_teacher_career_path(teacher_career) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No hay ningun docente activo para esta carrera</p>
+    <% end %>
+  </div>
+
   <section class="mt-5 bg-light rounded-3 p-5">
     <% if @subjects.any? %>
     <h2 class="mb-4">Asignaturas</h2>
