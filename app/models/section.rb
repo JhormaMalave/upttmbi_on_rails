@@ -2,6 +2,7 @@ class Section < ApplicationRecord
   belongs_to :course
   belongs_to :period
   belongs_to :career
+  has_many :academic_charges
 
   enum shift: ['Mañana', 'Tarde', 'Fin de semana']
   validates :name, presence: true, uniqueness: { scope: [:course, :period, :trimester, :career] }

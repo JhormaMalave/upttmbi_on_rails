@@ -6,36 +6,40 @@
       <h2>Asignaturas registradas</h2>
       <%= link_to 'Nuevo', new_staff_subject_path, class: 'btn btn-outline-primary' %>
     </div>
-    <div class="px-5">
-      <table class="table table-borderless table-hover">
-        <thead>
+    <table class="mt-4 table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>UC</th>
+          <th>Carrera</th>
+          <th>Trayecto</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @subjects.each do |subject| %>
           <tr>
-            <th>Name</th>
-            <th>Curricular units</th>
-            <th>Duration</th>
-            <th>Status</th>
-            <th>Course</th>
-            <th>Opciones</th>
+            <td><%= subject.name %></td>
+            <td><%= subject.curricular_units %></td>
+            <td><%= subject.career.name %></td>
+            <td><%= subject.course.name %></td>
+            <td>
+              <% if subject.status %>
+                <span class="text-success">Activo</span>
+              <% else %>
+                <span class="text-danger">Inactivo</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'Ver', staff_subject_path(subject) %> |
+              <%= link_to 'Editar', edit_staff_subject_path(subject) %> |
+              <%= link_to 'Eliminar', staff_subject_url(subject), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <% @subjects.each do |subject| %>
-            <tr>
-              <td><%= subject.name %></td>
-              <td><%= subject.curricular_units %></td>
-              <td><%= subject.duration %></td>
-              <td><%= subject.status %></td>
-              <td><%= subject.course.name %></td>
-              <td>
-                <%= link_to 'Show', staff_subject_path(subject) %>
-                <%= link_to 'Edit', edit_staff_subject_path(subject) %>
-                <%= link_to 'Destroy', staff_subject_url(subject), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </section>
 <br>
 

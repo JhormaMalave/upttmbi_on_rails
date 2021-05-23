@@ -64,6 +64,6 @@ class Department::AcademicChargesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def academic_charge_params
-      params.require(:academic_charge).permit(:teacher_id, :section_id, :subject_id, :observation)
+      params.require(:academic_charge).permit(:teacher_career_id, :section_id, :subject_id, :observation)
     end
 end

@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_223713) do
   enable_extension "plpgsql"
 
   create_table "academic_charges", force: :cascade do |t|
-    t.bigint "teacher_id", null: false
+    t.bigint "teacher_career_id", null: false
     t.bigint "section_id", null: false
     t.bigint "subject_id", null: false
     t.text "observation"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_223713) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["section_id"], name: "index_academic_charges_on_section_id"
     t.index ["subject_id"], name: "index_academic_charges_on_subject_id"
-    t.index ["teacher_id"], name: "index_academic_charges_on_teacher_id"
+    t.index ["teacher_career_id"], name: "index_academic_charges_on_teacher_career_id"
   end
 
   create_table "careers", force: :cascade do |t|
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_223713) do
 
   add_foreign_key "academic_charges", "sections"
   add_foreign_key "academic_charges", "subjects"
-  add_foreign_key "academic_charges", "teachers"
+  add_foreign_key "academic_charges", "teacher_careers"
   add_foreign_key "sections", "careers"
   add_foreign_key "sections", "courses"
   add_foreign_key "sections", "periods"

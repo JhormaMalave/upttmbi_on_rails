@@ -39,4 +39,20 @@
       <p class="text-danger">Inactivo</p>
     <% end %>
   </div>
+
+  <div>
+    <h2 class="mb-4 text-muted">Docentes activos</h2>
+    <% if @subject.academic_charges.where(section: Section.where(period: Period.where(status: true))).any? %>
+      <ul class="list-group list-group-flush mb-4">
+        <% @subject.teacher_careers.where(status: true).each do |teacher_career| %>
+          <li class="d-flex justify-content-between list-group-item">
+            <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher)  %>
+            <%= link_to "Ver más", staff_teacher_career_path(teacher_career) %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No hay ningun docente activo para esta carrera</p>
+    <% end %>
+  </div>
 </div>

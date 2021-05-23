@@ -1,6 +1,8 @@
 class Subject < ApplicationRecord
   belongs_to :career
   belongs_to :course
+  has_many :academic_charges
+  has_many :teacher_careers, through: :academic_charges
 
   enum subject_type: ['Taller', 'Curso']
   enum duration: ['Trimestral', 'Semestral', 'Anual']
