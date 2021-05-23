@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   
   namespace :staff do
+    resources :users
     resources :careers
     resources :teachers
     resources :subjects

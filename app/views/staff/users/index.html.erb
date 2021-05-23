@@ -1,0 +1,34 @@
+<div class="container">
+  <h1 class="display-1">Usuarios</h1>
+
+  <section>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Usuarios registrados</h2>
+      <%= link_to 'Nuevo', new_staff_user_path, class: 'btn btn-outline-primary' %>
+    </div>
+    <table class="mt-4 table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Administrador</th>
+          <th>Departamentos</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td>No</td>
+            <td>Informatica, Administracion</td>
+            <td>
+              <%= link_to 'Ver', staff_user_path(user) %> |
+              <%= link_to 'Editar', edit_staff_user_path(user) %> |
+              <%= link_to 'Eliminar', staff_user_url(user), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>
