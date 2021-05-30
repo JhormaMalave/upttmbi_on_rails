@@ -27,12 +27,12 @@ id_types = ['V', 'P']
 
 courses = [0, 1, 2, 3, 4]
 
-"""
+
 users.each do |user|
   new_user = User.new(user)
   new_user.save
 end
-"""
+
 id_types.each do |id_type|
   IdType.find_or_create_by(name: id_type)
 end

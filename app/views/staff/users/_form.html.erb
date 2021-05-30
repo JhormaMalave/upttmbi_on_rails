@@ -16,5 +16,35 @@
     <%= form.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :password, 'Contraseña', class: 'form-label' %><br />
+    <%= form.password_field :password, autofocus: true, class: 'form-control' %>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :password_confirm, 'Confirmar contraseña', class: 'form-label' %><br />
+    <%= form.password_field :password_confirm, autofocus: true, class: 'form-control' %>
+  </div>
 
+  <hr />
+  <% if @careers.any? %>
+    <p class="text-muted">Puedes selecionar uno o varios departamentos por cada usuario.</p>
+    <div class="mb-3">
+      <label class="form-label">Categorías</label>
+      <% @careers.each do |career| %>
+        <div class="field">
+          <label class="form-check-label">
+            <%= check_box_tag "careers[]", career.id, class: 'form-check-input' %>
+            <%= career.name %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-muted">Debes registrar alguna carrera, para poder asignar al usuario en el momento de crearlo.</p>
+  <% end %>
+
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
+  </div>
 <% end %>

@@ -24,7 +24,7 @@
             <td>
             <%= link_to 'Ver', staff_career_path(career) %>
             <%= link_to 'Editar', edit_staff_career_path(career) %>
-            <%= link_to 'Eliminar', staff_careers_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            <%= link_to 'Eliminar', staff_career_url(career), method: :delete, data: { confirm: 'Estas seguro?' } %>
             </td>
           </tr>
         <% end %>

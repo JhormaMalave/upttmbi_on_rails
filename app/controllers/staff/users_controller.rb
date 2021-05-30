@@ -13,6 +13,7 @@ class Staff::UsersController < Staff::StaffController
   # GET /staff/users/new
   def new
     @user = User.new
+    @careers = Career.all
   end
 
   # GET /staff/user/1/edit
@@ -21,11 +22,11 @@ class Staff::UsersController < Staff::StaffController
 
   # POST /staff/users or /staff/users.json
   def create
-    @user = user.new(user_params)
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to staff_user_path(@user), notice: "La asignatura fue creada exitosamente." }
+        format.html { redirect_to staff_user_path(@user), notice: "El usuario fue registrado exitosamente." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,11 +38,11 @@ class Staff::UsersController < Staff::StaffController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = user.find(params[:id])
+      @user = User.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password)
+      params.require(:user).permit(:email, :password, :careers)
     end
 end
