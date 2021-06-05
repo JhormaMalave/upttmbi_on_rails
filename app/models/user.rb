@@ -11,15 +11,16 @@ class User < ApplicationRecord
 
   attr_accessor :career_list
   after_create :save_careers
-  
+  after_update :save_careers
   
   private 
     def save_careers
-      puts 11111111
-      puts career_list
-      puts self.id
+      career_list.delete('0')
+      return UserCareer.where(user_id: self.id).destroy_all if career_list.nil? || career_list.empty?
+      
+      UserCareer.where.not(career_id: career_list).where(user_id: self.id).destroy_all
+
       career_list.each do |career_id|
-        next if career_id == 0 || career_id == '0'
         UserCareer.find_or_create_by(career_id: career_id, user_id: self.id)
       end
     end
