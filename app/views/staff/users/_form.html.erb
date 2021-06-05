@@ -30,11 +30,11 @@
   <% if @careers.any? %>
     <p class="text-muted">Puedes selecionar uno o varios departamentos por cada usuario.</p>
     <div class="mb-3">
-      <label class="form-label">Categorías</label>
+      <label class="form-label">Departamentos</label>
       <% @careers.each do |career| %>
         <div class="field">
           <label class="form-check-label">
-            <%= check_box_tag "careers[]", career.id, class: 'form-check-input' %>
+            <%= form.check_box :career_list, { multiple: true, checked: user.careers.include?(career) }, career.id %>
             <%= career.name %>
           </label>
         </div>

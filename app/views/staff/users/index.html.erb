@@ -20,7 +20,16 @@
           <tr>
             <td><%= user.email %></td>
             <td>No</td>
-            <td>Informatica, Administracion</td>
+            <% if user.careers.any? %>
+              <td>
+              <% user.careers.each do |career| %>
+                <%= career.name %> |
+              <% end %>
+              </td>
+
+            <% else %>
+              <td>Ninguno</td>
+            <% end %>
             <td>
               <%= link_to 'Ver', staff_user_path(user) %> |
               <%= link_to 'Editar', edit_staff_user_path(user) %> |

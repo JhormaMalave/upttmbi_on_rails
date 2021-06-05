@@ -43,6 +43,6 @@ class Staff::UsersController < Staff::StaffController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :password, :careers)
+      params.require(:user).permit(:email, :password, career_list: [])
     end
 end
