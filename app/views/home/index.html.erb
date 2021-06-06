@@ -1,1 +1,32 @@
-<h1>Hola mndo</h1>
+<div class='container mt-4'>
+    <h1 class="display-2">Hola Bienvenido(a)</h1>
+
+    
+    <div class="card mt-4 border-primary p-3">
+        <div class="card-body text-primary">
+            <h5 class="card-title">Seccion administrativa</h5>
+            <p class="card-text">
+            En esta seccion podras trabajar con todo lo relacionado a el control del personal docente, PNFs, unidades curriculares, gestion de usuarios...
+            </p>
+            <div class="text-end">
+                <a href="/staff" class="btn btn-primary">Ingresar</a>
+            </div>
+        </div>
+    </div>
+
+    <% if current_user.careers.any? %>
+        <h2 class="mt-5 mb-4 display-5">Departamentos asignados</h2>
+        <div class="row">
+            <% current_user.careers.each do |career| %>
+                <div class="col-sm-3 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4"><%= career.name %></h5>
+                            <%= link_to 'Ingresar', department_path(career), class: "btn btn-outline-primary" %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+</div>

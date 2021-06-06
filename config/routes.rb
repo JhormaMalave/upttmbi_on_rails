@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :department do
+    get '/:id', to: "home#index"
+  end
+  namespace :department do
     resources :academic_charges
     resources :sections
     resources :periods

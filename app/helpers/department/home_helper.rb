@@ -1,0 +1,2 @@
+module Department::HomeHelper
+end
