@@ -12,7 +12,7 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-/* For bootstrap */
 
-import 'bootstrap/dist/js/bootstrap';
-import "../stylesheets/application";
+// Argon style
+import "@fortawesome/fontawesome-free/js/all"
+import "jquery/dist/jquery"
