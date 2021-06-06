@@ -15,9 +15,13 @@ ActiveStorage.start()
 
 // Argon style
 import "@fortawesome/fontawesome-free/js/all";
-import "jquery/dist/jquery.min";
-import "./argon";
+import "jquery/dist/jquery";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "js-cookie/src/js.cookie";
 import "jquery.scrollbar/jquery.scrollbar";
 import "jquery-scroll-lock/jquery-scrollLock"
+import "./argon";
+
+// Argon components
+import "./components/init/scroll-to"
+import "./components/init/tooltip"
