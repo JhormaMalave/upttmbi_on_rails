@@ -16,3 +16,4 @@ ActiveStorage.start()
 // Argon style
 import "@fortawesome/fontawesome-free/js/all"
 import "jquery/dist/jquery"
+import "./argon.min.js"
