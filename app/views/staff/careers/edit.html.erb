@@ -26,6 +26,11 @@
                   Carreras
                 <% end %>
               </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_career_path(@career) do %>
+                  <%= @career.name %>
+                <% end %>
+              </li>
               <li class="breadcrumb-item active" aria-current="page">Editar</li>
             </ol>
           </nav>

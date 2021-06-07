@@ -1,72 +1,115 @@
-<div class="container pt-4">
-  <div class="d-flex justify-content-end mb-3">
-    <%= link_to 'Volver', staff_careers_path, class: 'btn btn-link' %>
-    <%= link_to 'Editar', edit_staff_career_path(@career), class: 'btn btn-warning' %>
-  </div>
-  <h1 class="display-3"><%= @career.name %></h1>
-  <p class="text-muted h2 mb-4">Información</p>
-
-  <div class="">
-    <h3 class="h6">Nombre</h3>
-    <p><%= @career.name %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Docentes</h3>
-    <p><%= @career.teachers.count %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Docentes activos</h3>
-    <p><%= @career.teachers.where(status: true).count %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Docentes inactivos</h3>
-    <p><%= @career.teachers.where(status: false).count %></p>
-  </div>
-  <div class="">
-    <h3 class="h6">Unidades curriculares</h3>
-    <p><%= @career.subjects.where(status: true).count %></p>
-  </div>
-  
-  <div>
-    <h2 class="mb-4 text-muted">Docentes activos</h2>
-    <% if @career.teacher_careers.where(status: true).any? %>
-      <ul class="list-group list-group-flush mb-4">
-        <% @career.teacher_careers.where(status: true).each do |teacher_career| %>
-          <li class="d-flex justify-content-between list-group-item">
-            <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher)  %>
-            <%= link_to "Ver más", staff_teacher_career_path(teacher_career) %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-muted">No hay ningun docente activo para esta carrera</p>
-    <% end %>
-  </div>
-
-  <section class="mt-5 bg-light rounded-3 p-5">
-    <% if @subjects.any? %>
-    <h2 class="mb-4">Asignaturas</h2>
-      <% @subjects.each do |subject| %>
-        <div class="col-md-4 col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><%= subject.name %></h5>
-              <ul class="card-text">
-                <li><strong>Trayecto:</strong> <%= subject.course.name %></li>
-                <li><strong>UC:</strong> <%= subject.curricular_units %></li>
-                <li><strong>Duración:</strong> <%= subject.duration %></li>
-                <li><strong>Tipo:</strong> <%= subject.subject_type %></li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <%= link_to 'Ver mas', staff_subject_path(subject), class: "link-primary" %>
-            </div>
-          </div>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_careers_path do %>
+                  Carreras
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page"><%= @career.name %></li>
+            </ol>
+          </nav>
         </div>
-      <% end %>
-    <% else %>
-      <p class="display-3 text-muted">No hay ninguna asignatura activa para esta carrera</p>
-      <%= link_to 'Registrar', new_staff_subject_path, class: 'btn btn-outline-primary' %>
-    <% end %>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Editar', edit_staff_career_path(@career), class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h1 class="mb-0" ><%= @career.name %></h1>
+    </div>
+    <div class="card-body">
+      <div class="">
+        <h3 class="h6">Nombre</h3>
+        <p><%= @career.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Docentes</h3>
+        <p><%= @career.teachers.count %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Docentes activos</h3>
+        <p><%= @career.teachers.where(status: true).count %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Docentes inactivos</h3>
+        <p><%= @career.teachers.where(status: false).count %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Unidades curriculares</h3>
+        <p><%= @career.subjects.where(status: true).count %></p>
+      </div>
+    </div>
   </section>
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header border-0">
+          <h1 class="mb-0" >Docentes activos</h1>
+        </div>
+        <div class="card-body pt-0">
+          <% if @career.teacher_careers.where(status: true).any? %>
+            <ul class="list-group list-group-flush">
+              <% @career.teacher_careers.where(status: true).each do |teacher_career| %>
+                <li class="d-flex justify-content-between list-group-item">
+                  <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher)  %>
+                  <%= link_to "Ver más", staff_teacher_career_path(teacher_career) %>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-muted">No hay ningun docente activo para esta carrera</p>
+            <%= link_to 'Registrar', new_staff_teacher_career_path, class: 'btn btn-outline-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header border-0">
+          <h1 class="mb-0" >Asignaturas</h1>
+        </div>
+        <% if @subjects.any? %>
+          <ul class="list-group list-group-flush">
+            <% @subjects.each do |subject| %>
+              <li class="d-flex justify-content-between list-group-item">
+                <%= link_to subject.name, staff_subject_path(subject) %>
+                <p>Trayecto: <%= subject.course.name %></p> 
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="card-body pt-0">
+            <p class="text-muted">No hay ninguna asignatura activa para esta carrera</p>
+            <%= link_to 'Registrar', new_staff_subject_path, class: 'btn btn-outline-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
