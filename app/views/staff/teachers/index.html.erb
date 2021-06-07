@@ -1,15 +1,46 @@
-<div class="container">
-  <h1 class="display-1">Docentes</h1>
-  
-  <section>
-    <div class="d-flex justify-content-between align-items-center">
-      <h2>Docentes registrados</h2>
-      <%= link_to 'Nuevo', new_staff_teacher_path, class: 'btn btn-outline-primary' %>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Docentes</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Nuevo', new_staff_teacher_path, class: "btn btn-neutral" %>
+        </div>
+      </div>
     </div>
-    <table class="mt-4 table table-borderless table-hover table-bordered">
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h2 class="mb-0" >Docentes registrados</h2>
+    </div>
+    <table class="table table-borderless table-hover table-bordered">
       <thead>
         <tr>
-          <th>#</th>
           <th>Identificación</th>
           <th>Nombres</th>
           <th>Capacitado</th>
@@ -20,7 +51,6 @@
       <tbody>
         <% @teachers.each do |teacher| %>
           <tr>
-            <td><%= teacher.id %></td>
             <td><%= teacher.id_type.name %> - <%= teacher.id_number %></td>
             <td><%= teacher.surname %> <%= teacher.name %></td>
             <td>
@@ -36,9 +66,9 @@
               <% end %>
             </td>
             <td>
-            <%= link_to 'Mostrar', staff_teacher_path(teacher) %> | 
-            <%= link_to 'Editar', edit_staff_teacher_path(teacher) %> | 
-            <%= link_to 'Eliminar', staff_teacher_path(teacher), method: :delete, data: { confirm: 'Estas seguro?' } %>
+              <%= link_to 'Mostrar', staff_teacher_path(teacher) %> | 
+              <%= link_to 'Editar', edit_staff_teacher_path(teacher) %> | 
+              <%= link_to 'Eliminar', staff_teacher_path(teacher), method: :delete, data: { confirm: 'Estas seguro?' } %>
             </td>
           </tr>
         <% end %>

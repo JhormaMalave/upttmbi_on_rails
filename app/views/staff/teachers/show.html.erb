@@ -1,12 +1,50 @@
-<div class="container pt-4">
-  <section>
-    <div class="d-flex justify-content-end mb-3">
-      <%= link_to 'Docentes', staff_teachers_path, class: 'btn btn-link' %>
-      <%= link_to 'Editar', edit_staff_teacher_path(@teacher), class: 'btn btn-warning' %>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_teachers_path do %>
+                  Carreras
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page"><%= @teacher.name %></li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Editar', edit_staff_teacher_path(@teacher), class: "btn btn-neutral" %>
+        </div>
+      </div>
     </div>
-    <h1 class="display-3"><%= @teacher.name %></h1>
-    <h2 class="text-muted mb-4">Información</h2>
-    <div class="">
+  </div>
+</div>
+
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h1 class="mb-0" ><%= @teacher.name %> <%= @teacher.surname %></h1>
+    </div>
+    <div class="card-body">
+      <div class="">
       <h3 class="h6">Identificación</h3>
       <p><%= @teacher.id_type.name %> - <%= @teacher.id_number %></p>
     </div>
@@ -41,30 +79,37 @@
     </div>
   </section>
 
-  <hr />
   <% if @teacher.teacher_degrees.any? %>
-    <section>
-      <h2>Educación</h2>
-      <p class="text-muted mb-4">Certificados y titulos obtenidos o en proceso</p>
-      <div class="d-flex flex-row ">
-      <% @teacher.teacher_degrees.each do |degree|%>
-        <div class="card me-3 <%= 'border-success text-success' if degree.status %>">
-          <div class="card-body">
-            <h3 class="card-title h5"><%= degree.name %></h3>
-            <div class="card-subtitle mb-2 text-muted"><%= degree.degree_type %></div>
-            <p class="card-text"><%= degree.status ? 'Finalizado' : 'En proceso' %></p>
-            <%= link_to 'Ver mas', staff_teacher_degree_path(degree) %>
-          </div>
-        </div>
-      <% end %>
+    <section class="card">
+      <div class="card-header border-0">
+        <h2 class="mb-0" >Certificados y titulos</h2>
       </div>
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Estado</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>  
+          <% @teacher.teacher_degrees.each do |degree|%>
+            <tr>
+              <td><%= degree.name %></td>
+              <td><%= degree.degree_type %></td>
+              <td><%= degree.status ? 'Finalizado' : 'En proceso' %></td>
+              <td><%= link_to 'Ver mas', staff_teacher_degree_path(degree) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </section>
   <% end %>
-  <hr />
+
   <% if @teacher.careers.any? %>
     <section>
       <h2>Carreras</h2>
-      <p class="text-muted mb-4">El docente se encuentra capacitado para impartir clases en las siguientes carreras carreras</p>
       <div class="d-flex flex-row">
         <% @teacher.careers.each do |career| %>
           <% teacher_career = TeacherCareer.find_by(career_id: career.id) %>
@@ -73,7 +118,7 @@
               <h5 class="card-title"><%= career.name %></h5>
               <h6 class="card-subtitle mb-2 text-muted"><%= link_to 'Mostrar información', staff_teacher_career_path(teacher_career.id) %></h6>
               <p class="card-text"><%= teacher_career.observation? ? teacher_career.observation : 'No tiene ninguna observación' %></p>
-              <%= link_to 'Editar', edit_staff_teacher_career_path(teacher_career), class: 'btn btn-outline-warning' %>
+              <%= link_to 'Editar', edit_staff_teacher_career_path(teacher_career), class: 'btn btn-warning' %>
               <%= link_to 'Eliminar', staff_teacher_career_path(teacher_career), method: :delete, data: { confirm: 'Estas seguro?' }, class: 'btn btn-outline-danger' %>
             </div>
           </div>
