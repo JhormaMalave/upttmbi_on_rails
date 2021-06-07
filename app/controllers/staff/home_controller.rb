@@ -5,9 +5,10 @@ class Staff::HomeController < Staff::StaffController
   def index
     @teacher_count = Teacher.all.count
     @teacher_active_count = Teacher.where(status: true).count
-    @teacher = Teacher.last(5)
+    @teachers = Teacher.last(5)
     @user_count = User.all.count
     @user_admin_count = User.all.count
+    @users = User.last(5)
     @career_count = Career.all.count
     @career_active_count = Career.all.count
     @subject_count = Subject.all.count
