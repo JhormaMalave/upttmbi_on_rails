@@ -1,9 +1,49 @@
-<div class="container pt-4">
-<h1 class="mb-5">Editar carrera</h1>
-
-<%= render 'form', career: @career %>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_careers_path do %>
+                  Carreras
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Editar</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Nueva', new_staff_career_path, class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to 'Show', staff_career_path(@career) %> |
-<%= link_to 'Back', staff_careers_path %>
-
+<div class="container-fluid mt--6">
+    <section class="card">
+        <div class="card-header border-0">
+            <h2 class="mb-0" >Editar carrera</h2>
+        </div>
+        <div class="px-4">
+            <%= render 'form', career: @career %>
+        </div>
+    </section>
+</div>
