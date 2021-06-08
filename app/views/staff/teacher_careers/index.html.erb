@@ -1,6 +1,41 @@
-<div class="container">
-  <h1 class="display-1">Docentes</h1>
-  
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Docentes carreras</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Nuevo', new_staff_teacher_career_path, class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid mt--6">  
   <section>
     <div class="d-flex justify-content-between align-items-center">
       <h2>Docentes en carrera</h2>
@@ -8,30 +43,34 @@
     </div>
     <div>
       <% @careers.each do |career| %>
-        <h3><%= career.name %></h3>
-        <% if career.teacher_careers.any? %>
-          <ul class="list-group list-group-flush mb-4">
-            <% career.teacher_careers.order(:status).each do |teacher_career| %>
-              <li class="d-flex justify-content-between list-group-item">
-                <div>
-                <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher_id), class: 'link-secondary' %>
-                <% if teacher_career.status %>
-                  <small class="text-success">Activo*</small>
-                <% else %>
-                  <small class="text-danger">Inactivo*</small>
-                <% end %>
-                </div>
-                <div>
-                  <%= link_to 'Mas detalles', staff_teacher_career_path(teacher_career) %> |
-                  <%= link_to 'Editar', edit_staff_teacher_career_path(teacher_career) %> |
-                  <%= link_to 'Eliminar', staff_teacher_career_path(teacher_career), method: :delete, data: { confirm: 'Estas seguro?' } %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p class="text-muted mb-4">No has registrado a ningun docente para esta carrera</p>
-        <% end %>
+        <div class="card">
+          <div class="card-header">
+            <h3><%= career.name %></h3>
+          </div>
+          <% if career.teacher_careers.any? %>
+            <ul class="list-group list-group-flush mb-4">
+              <% career.teacher_careers.order(:status).each do |teacher_career| %>
+                <li class="d-flex justify-content-between list-group-item">
+                  <div>
+                  <%= link_to "#{teacher_career.teacher.surname} #{teacher_career.teacher.name}", staff_teacher_path(teacher_career.teacher_id), class: 'link-secondary' %>
+                  <% if teacher_career.status %>
+                    <small class="text-success">Activo*</small>
+                  <% else %>
+                    <small class="text-danger">Inactivo*</small>
+                  <% end %>
+                  </div>
+                  <div>
+                    <%= link_to 'Mas detalles', staff_teacher_career_path(teacher_career) %> |
+                    <%= link_to 'Editar', edit_staff_teacher_career_path(teacher_career) %> |
+                    <%= link_to 'Eliminar', staff_teacher_career_path(teacher_career), method: :delete, data: { confirm: 'Estas seguro?' } %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p class="text-muted card-body">No has registrado a ningun docente para esta carrera</p>
+          <% end %>
+        </div>
       <% end %>
       <h3></h3>
     </div>

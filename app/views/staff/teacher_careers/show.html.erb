@@ -1,33 +1,73 @@
-<div class="container pt-4">
-  <section>
-    <div class="d-flex justify-content-end mb-3">
-      <%= link_to 'Docentes / Carrera', staff_teacher_careers_path, class: 'btn btn-link' %>
-      <%= link_to 'Editar', edit_staff_teacher_career_path(@teacher_career), class: 'btn btn-warning' %>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_root_path do %>
+                  Panel administrativo
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to staff_teacher_careers_path do %>
+                  Docentes carreras
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active">
+                <%= @teacher_career.teacher.name %>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Editar', edit_staff_teacher_career_path(@teacher_career), class: "btn btn-neutral" %>
+        </div>
+      </div>
     </div>
-    <h1 class="display-3">Docente Carrera</h1>
-    <h2 class="text-muted mb-4">Información</h2>
-    <div class="">
-      <h3 class="h6">Docente</h3>
-      <p><%= link_to "#{@teacher_career.teacher.surname} #{@teacher_career.teacher.name}", staff_teacher_path(@teacher_career.teacher_id) %></p>
-    </div>
+  </div>
+</div>
 
-    <div class="">
-      <h3 class="h6">Carrera</h3>
-      <p><%= link_to @teacher_career.career.name, staff_career_path(@teacher_career.career_id) %></p>
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h1 class="mb-0" ><%= @teacher_career.teacher.name %></h1>
     </div>
-    
-    <div class="">
-      <h3 class="h6">Observación</h3>
-      <p><%= @teacher_career.observation || 'No definido' %></p>
-    </div>
-    <div class="">
-      <h3 class="h6">Estado</h3>
-      <% if @teacher_career.status %>
-        <p class="text-success">Activo</p>
-      <% else %>
-        <p class="text-danger">Inactivo</p>
-      <% end %>
+    <div class="card-body">
+      <div class="">
+        <h3 class="h6">Docente</h3>
+        <p><%= link_to "#{@teacher_career.teacher.surname} #{@teacher_career.teacher.name}", staff_teacher_path(@teacher_career.teacher_id) %></p>
+      </div>
+
+      <div class="">
+        <h3 class="h6">Carrera</h3>
+        <p><%= link_to @teacher_career.career.name, staff_career_path(@teacher_career.career_id) %></p>
+      </div>
+      
+      <div class="">
+        <h3 class="h6">Observación</h3>
+        <p><%= @teacher_career.observation || 'No definido' %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Estado</h3>
+        <% if @teacher_career.status %>
+          <p class="text-success">Activo</p>
+        <% else %>
+          <p class="text-danger">Inactivo</p>
+        <% end %>
+      </div>
     </div>
   </section>
-
 </div>

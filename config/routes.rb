@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
-  
-  devise_for :users, only: [:sessions], controllers: {
+
+  devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
   
