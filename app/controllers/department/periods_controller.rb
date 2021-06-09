@@ -1,10 +1,11 @@
 class Department::PeriodsController < ApplicationController
   before_action :set_period, only: %i[ show edit update destroy ]
+  before_action :set_career, only: %i[ index show edit new]
 
   # GET /department/periods or /department/periods.json
   def index
     @periods = Period.all
-    @career = Career.find(params[:career])
+    
   end
 
   # GET /department/periods/1 or /department/periods/1.json
@@ -26,7 +27,7 @@ class Department::PeriodsController < ApplicationController
 
     respond_to do |format|
       if @period.save
-        format.html { redirect_to department_period_path(@period), notice: "El periodo fue exitosamente creado." }
+        format.html { redirect_to department_period_path(id: @period.id), notice: "El periodo fue exitosamente creado." }
         format.json { render :show, status: :created, location: @period }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class Department::PeriodsController < ApplicationController
   def update
     respond_to do |format|
       if @period.update(period_params)
-        format.html { redirect_to department_period_path(@period), notice: "Period was successfully updated." }
+        format.html { redirect_to department_period_path(id: @period.id), notice: "Period was successfully updated." }
         format.json { render :show, status: :ok, location: @period }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,6 +62,10 @@ class Department::PeriodsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_period
       @period = Period.find(params[:id])
+    end
+
+    def set_career
+      @career = Career.find(params[:career])
     end
 
     # Only allow a list of trusted parameters through.

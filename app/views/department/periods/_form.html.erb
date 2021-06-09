@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, 'Nombre', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :start %>
-    <%= form.date_select :start %>
+  <div class="mb-3">
+    <%= form.label :start, 'Inicio', class: 'form-label' %>
+    <%= form.date_field :start, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :finish %>
-    <%= form.date_select :finish %>
+  <div class="mb-3">
+    <%= form.label :finish, 'Fin', class: 'form-label' %>
+    <%= form.date_field :finish, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.check_box :status %>
+  <div class="form-check form-switch mb-3">
+    <%= form.check_box :status, class: 'form-check-input', checked: true %>
+    <%= form.label :status, 'Estado', class: 'form-check-label' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
   </div>
 <% end %>

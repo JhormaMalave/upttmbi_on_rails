@@ -204,18 +204,17 @@
                 <% if @periods[index] %>
                   <tr>
                     <th scope="row">
-                      <%= @users[index].name %>
+                      <%= @periods[index].name %>
                     </th>
                     <td>
-                      <%= @users[index].start %>
+                      <%= @periods[index].start %>
                     </td>
                     <td>
-                      <%= @users[index].end %>
+                      <%= @periods[index].finish %>
                     </td>
                     <td>
-                      <%= @users[index].stats %>
+                      <%= @periods[index].status %>
                     </td>
-                    <td>Si</td>
                   </tr>
                 <% else %>
                   <tr>
