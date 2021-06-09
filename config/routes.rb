@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
+
+
   namespace :department do
-    get '/:id', to: "home#index"
-  end
-  namespace :department do
-    resources :academic_charges
-    resources :sections
-    resources :periods
+    scope "/:career/" do
+      resources :academic_charges
+      resources :sections
+      resources :periods
+      resources :teachers, only: [:index]
+      root to: "home#index"
+    end
   end
   
   namespace :staff do

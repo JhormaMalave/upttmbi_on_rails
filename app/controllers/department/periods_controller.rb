@@ -4,6 +4,7 @@ class Department::PeriodsController < ApplicationController
   # GET /department/periods or /department/periods.json
   def index
     @periods = Period.all
+    @career = Career.find(params[:career])
   end
 
   # GET /department/periods/1 or /department/periods/1.json
