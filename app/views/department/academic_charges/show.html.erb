@@ -1,24 +1,83 @@
-<p id="notice"><%= notice %></p>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_root_path do %>
+                  Panel <%= @career.name %>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_academic_charges_path do %>
+                  Periodos
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <%= @academic_charge.teacher_career.teacher.name %>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Editar', edit_department_academic_charge_path(id: @academic_charge.id), class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Teacher:</strong>
-  <%= @academic_charge.teacher_career_id %>
-</p>
-
-<p>
-  <strong>Section:</strong>
-  <%= @academic_charge.section_id %>
-</p>
-
-<p>
-  <strong>Subject:</strong>
-  <%= @academic_charge.subject_id %>
-</p>
-
-<p>
-  <strong>Observation:</strong>
-  <%= @academic_charge.observation %>
-</p>
-
-<%= link_to 'Edit', edit_department_academic_charge_path(@academic_charge) %> |
-<%= link_to 'Back', department_academic_charges_path %>
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h1 class="mb-0" ><%= @academic_charge.teacher_career.teacher.surname %> <%= @academic_charge.teacher_career.teacher.name %></h1>
+    </div>
+    <div class="card-body">
+      <div class="">
+        <h3 class="h6">Docente</h3>
+        <p><%= @academic_charge.teacher_career.teacher.surname %> <%= @academic_charge.teacher_career.teacher.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Turno</h3>
+        <p><%= @academic_charge.section.shift %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Seccion</h3>
+        <p><%= @academic_charge.section.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Trayecto</h3>
+        <p><%= @academic_charge.section.course.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Asignatura</h3>
+        <p><%= @academic_charge.subject.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Asignatura</h3>
+        <p><%= @academic_charge.observation %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Estado</h3>
+        <% if @academic_charge.section.period.status %>
+          <p class="text-success">Activo</p>
+        <% else %>
+          <p class="text-danger">Inactivo</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>
