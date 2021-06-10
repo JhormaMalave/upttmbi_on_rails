@@ -1,34 +1,79 @@
-<p id="notice"><%= notice %></p>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_root_path do %>
+                  Panel <%= @career.name %>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_sections_path do %>
+                  Secciones
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <%= @section.name %>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Editar', edit_department_section_path(id: @section.id), class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @section.name %>
-</p>
-
-<p>
-  <strong>Trimester:</strong>
-  <%= @section.trimester %>
-</p>
-
-<p>
-  <strong>Shift:</strong>
-  <%= @section.shift %>
-</p>
-
-<p>
-  <strong>Course:</strong>
-  <%= @section.course_id %>
-</p>
-
-<p>
-  <strong>Period:</strong>
-  <%= @section.period_id %>
-</p>
-
-<p>
-  <strong>Career:</strong>
-  <%= @section.career_id %>
-</p>
-
-<%= link_to 'Edit', edit_department_section_path(@section) %> |
-<%= link_to 'Back', department_sections_path %>
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h1 class="mb-0" ><%= @section.name %></h1>
+    </div>
+    <div class="card-body">
+      <div class="">
+        <h3 class="h6">Nombre</h3>
+        <p><%= @section.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Trimestre</h3>
+        <p><%= @section.trimester %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Trayecto</h3>
+        <p><%= @section.course.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Turno</h3>
+        <p><%= @section.shift %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Periodo</h3>
+        <p><%= @section.period.name %></p>
+      </div>
+      <div class="">
+        <h3 class="h6">Estado</h3>
+        <% if @section.period.status %>
+          <p class="text-success">Activo</p>
+        <% else %>
+          <p class="text-danger">Inactivo</p>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>

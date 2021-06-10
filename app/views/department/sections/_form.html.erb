@@ -11,37 +11,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+
+  <div class="mb-3">
+    <%= form.label :name, 'Nombre', class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :trimester %>
-    <%= form.number_field :trimester %>
+  <div class="mb-3">
+    <%= form.label :trimester, 'Trimestre', class: 'form-label' %>
+    <%= form.number_field :trimester, class: 'form-control' %>
   </div>
 
   <div class="mb-3">
     <%= form.label :shift, 'Turno', class: 'form-label' %>
-    <%= form.select :shift, ['Mañana', 'Tarde', 'Fin de semana'], {}, class: 'form-select'  %>
+    <%= form.select :shift, ['Mañana', 'Tarde', 'Fin de semana'], {}, class: 'form-control'  %>
   </div>
 
-  <div class="field">
-    <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
+  <div class="mb-3">
+    <%= form.label :course_id, 'Trayecto', class: 'form-label'  %>
+    <%= form.collection_select :course_id, Course.all, :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :period_id %>
-    <%= form.text_field :period_id %>
+  <div class="mb-3">
+    <%= form.label :period_id, 'Periodo', class: 'form-label'  %>
+    <%= form.collection_select :period_id, Period.where(status: true), :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :career_id %>
-    <%= form.text_field :career_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
   </div>
 <% end %>

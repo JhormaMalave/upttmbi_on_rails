@@ -1,6 +1,6 @@
 class Department::PeriodsController < ApplicationController
   before_action :set_period, only: %i[ show edit update destroy ]
-  before_action :set_career, only: %i[ index show edit new]
+  before_action :set_career
 
   # GET /department/periods or /department/periods.json
   def index
@@ -40,7 +40,7 @@ class Department::PeriodsController < ApplicationController
   def update
     respond_to do |format|
       if @period.update(period_params)
-        format.html { redirect_to department_period_path(id: @period.id), notice: "Period was successfully updated." }
+        format.html { redirect_to department_period_path(career: @career.id, id: @period.id), notice: "Period was successfully updated." }
         format.json { render :show, status: :ok, location: @period }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -1,9 +1,10 @@
 class Department::SectionsController < ApplicationController
   before_action :set_section, only: %i[ show edit update destroy ]
+  before_action :set_career
 
   # GET /department/sections or /department/sections.json
   def index
-    @sections = Section.all
+    @sections = Section.where(career_id: params[:career])
   end
 
   # GET /department/sections/1 or /department/sections/1.json
@@ -22,10 +23,11 @@ class Department::SectionsController < ApplicationController
   # POST /department/sections or /department/sections.json
   def create
     @section = Section.new(section_params)
+    @section.career_id = params[:career]
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to department_section_path(@section), notice: "La sección fue creada exitosamente." }
+        format.html { redirect_to department_section_path(id: @section.id), notice: "La sección fue creada exitosamente." }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class Department::SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to department_section_path(@section), notice: "La sección fue actualizada correctamente." }
+        format.html { redirect_to department_section_path(career: @career.id, id: @section.id), notice: "La sección fue actualizada correctamente." }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,6 +62,10 @@ class Department::SectionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_section
       @section = Section.find(params[:id])
+    end
+
+    def set_career
+      @career = Career.find(params[:career])
     end
 
     # Only allow a list of trusted parameters through.

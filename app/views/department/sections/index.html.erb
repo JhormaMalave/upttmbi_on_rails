@@ -1,35 +1,70 @@
-<h1>Department Sections</h1>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_root_path do %>
+                  Panel <%= @career.name %>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Secciones</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Nueva', new_department_section_path, class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Trimester</th>
-      <th>Shift</th>
-      <th>Course</th>
-      <th>Period</th>
-      <th>Career</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sections.each do |section| %>
-      <tr>
-        <td><%= section.name %></td>
-        <td><%= section.trimester %></td>
-        <td><%= section.shift %></td>
-        <td><%= section.course_id %></td>
-        <td><%= section.period_id %></td>
-        <td><%= section.career_id %></td>
-        <td><%= link_to 'Show', department_section_path(section) %></td>
-        <td><%= link_to 'Edit', edit_department_section_path(section) %></td>
-        <td><%= link_to 'Destroy', department_section_path(section), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Department Section', new_department_section_path %>
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h2 class="mb-0" >Secciones registradas</h2>
+    </div>
+    <table class="table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Trimestre</th>
+          <th>Turno</th>
+          <th>Trayecto</th>
+          <th>Periodo</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sections.each do |section| %>
+          <tr>
+            <td><%= section.name %></td>
+            <td><%= section.trimester %></td>
+            <td><%= section.shift %></td>
+            <td><%= section.course.name %></td>
+            <td><%= section.period.name %></td>
+            <td>
+              <%= link_to 'Ver', department_section_path(id: section.id) %> |
+              <%= link_to 'Editar', edit_department_section_path(id: section.id) %> |
+              <%= link_to 'Eliminar', department_section_url(id: section.id), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>
