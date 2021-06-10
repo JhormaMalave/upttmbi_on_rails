@@ -4,34 +4,34 @@
       <h2><%= pluralize(academic_charge.errors.count, "error") %> prohibited this academic_charge from being saved:</h2>
 
       <ul>
-        <% academic_charge.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% academic_charge.errors.each do |academic_charge| %>
+          <li><%= academic_charge.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :teacher_career_id %>
-    <%= form.text_field :teacher_career_id %>
+  <div class="mb-3">
+    <%= form.label :teacher_career_id, 'Docente', class: 'form-label'  %>
+    <%= form.collection_select :teacher_career_id, TeacherCareer.where(teacher: Teacher.where(status: true), career: @career).joins(:teacher).select(:id, :name), :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :section_id %>
-    <%= form.text_field :section_id %>
+  <div class="mb-3">
+    <%= form.label :section_id, 'Seccion', class: 'form-label'  %>
+    <%= form.collection_select :section_id, Section.where(period: Period.where(status: true)), :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :subject_id %>
-    <%= form.text_field :subject_id %>
+  <div class="mb-3">
+    <%= form.label :subject_id, 'Seccion', class: 'form-label'  %>
+    <%= form.collection_select :subject_id, Subject.where(career: @career), :id, :name, {}, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :observation %>
-    <%= form.text_area :observation %>
+  <div class="mb-3">
+    <%= form.label :obsevation, 'Observación', class: 'form-label' %>
+    <%= form.text_area :obsevation, class: 'form-control', rows: 3 %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions d-flex flex-row-reverse mb-3">
+    <%= form.submit 'Enviar', class: 'btn btn-primary' %>
   </div>
 <% end %>

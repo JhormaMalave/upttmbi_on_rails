@@ -1,33 +1,78 @@
-<p id="notice"><%= notice %></p>
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home"></i>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to root_path do %>
+                  Inicio
+                <% end %>
+              </li>
+              <li class="breadcrumb-item">
+                <%= link_to department_root_path do %>
+                  Panel <%= @career.name %>
+                <% end %>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Cargas academicas</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col-lg-6 col-5 text-right">
+          <%= link_to 'Nueva', new_department_academic_charge_path, class: "btn btn-neutral" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<h1>Department Academic Charges</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Teacher</th>
-      <th>Section</th>
-      <th>Subject</th>
-      <th>Observation</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @academic_charges.each do |academic_charge| %>
-      <tr>
-        <td><%= academic_charge.teacher_career_id %></td>
-        <td><%= academic_charge.section_id %></td>
-        <td><%= academic_charge.subject_id %></td>
-        <td><%= academic_charge.observation %></td>
-        <td><%= link_to 'Show', department_academic_charge_path(academic_charge) %></td>
-        <td><%= link_to 'Edit', edit_department_academic_charge_path(academic_charge) %></td>
-        <td><%= link_to 'Destroy', department_academic_charge_path(academic_charge), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Department Academic Charge', new_department_academic_charge_path %>
+<div class="container-fluid mt--6">
+  <section class="card">
+    <div class="card-header border-0">
+      <h2 class="mb-0" >Cargas academicas registradas</h2>
+    </div>
+    <table class="table table-borderless table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Docente</th>
+          <th>Turno</th>
+          <th>Seccion</th>
+          <th>Trayecto</th>
+          <th>Asignatura</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @academic_charges.each do |academic_charge| %>
+          <tr>
+            <td><%= academic_charge.teacher_career.teacher.surname %> <%= academic_charge.teacher_career.teacher.name %></td>
+            <td><%= academic_charge.section.shift %></td>
+            <td><%= academic_charge.section.name %></td>
+            <td><%= academic_charge.section.course.name %></td>
+            <td><%= academic_charge.subject.name %></td>
+            <td>
+              <% if academic_charge.section.period.status %>
+                <span class="text-success">Activo</span>
+              <% else %>
+                <span class="text-danger">Inactivo</span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to 'Ver', department_academic_charge_path(id: academic_charge.id) %> |
+              <%= link_to 'Editar', edit_department_academic_charge_path(id: academic_charge.id) %> |
+              <%= link_to 'Eliminar', department_academic_charge_url(id: academic_charge.id), method: :delete, data: { confirm: 'Estas seguro?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>

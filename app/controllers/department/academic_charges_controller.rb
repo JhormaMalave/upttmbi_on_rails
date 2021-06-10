@@ -1,9 +1,10 @@
 class Department::AcademicChargesController < ApplicationController
   before_action :set_academic_charge, only: %i[ show edit update destroy ]
+  before_action :set_career
 
   # GET /department/academic_charges or /department/academic_charges.json
   def index
-    @academic_charges = AcademicCharge.all
+    @academic_charges = AcademicCharge.where(section: Section.where(career: params[:career]))
   end
 
   # GET /department/academic_charges/1 or /department/academic_charges/1.json
@@ -25,7 +26,7 @@ class Department::AcademicChargesController < ApplicationController
 
     respond_to do |format|
       if @academic_charge.save
-        format.html { redirect_to department_academic_charge_path(@academic_charge), notice: "Academic charge was successfully created." }
+        format.html { redirect_to department_academic_charge_path(id: @academic_charge.id), notice: "Academic charge was successfully created." }
         format.json { render :show, status: :created, location: @academic_charge }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class Department::AcademicChargesController < ApplicationController
   def update
     respond_to do |format|
       if @academic_charge.update(academic_charge_params)
-        format.html { redirect_to department_academic_charge_path(@academic_charge), notice: "Academic charge was successfully updated." }
+        format.html { redirect_to department_academic_charge_path(career: @career.name, id: @academic_charge.id), notice: "Academic charge was successfully updated." }
         format.json { render :show, status: :ok, location: @academic_charge }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,6 +61,10 @@ class Department::AcademicChargesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_academic_charge
       @academic_charge = AcademicCharge.find(params[:id])
+    end
+
+    def set_career
+      @career = Career.find(params[:career])
     end
 
     # Only allow a list of trusted parameters through.
